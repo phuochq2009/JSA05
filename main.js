@@ -1,8 +1,72 @@
-const url = 'https://api.rawg.io/api/games'
-fetch(url, {
+const API_KEY = 'd81ce92c1bcd4d74bba38ee005e26d8c'; 
+const BASE_URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
 
+const carouselInner = document.getElementById('carouselInner');
+let currentSlide = 0; 
+
+let y = 2;
+async function fetchGames(page = 1, pageSize = 40, totalPages = y) {
+  try {
+      let allGames = [];
+      for (let i = 1; i <= totalPages; i++) {
+          const response = await fetch(`${BASE_URL}&page=${i}&page_size=${pageSize}`);
+          const data = await response.json();
+          allGames = allGames.concat(data.results);
+      }
+      displayGames(allGames);
+  } catch (error) {
+      console.error('Error fetching game data:', error);
+  }
 }
-)
 
-.then(response => response.json())
-.then(value => console.log(value))
+function displayGames(games) {
+  let x = Math.floor(Math.random() * (40*y));
+  console.log(games);
+  
+    games.slice(x-3, x).forEach((game, index) => { // Show only first 3 games
+        const gameSlide = document.createElement('div');
+        gameSlide.classList.add('carousel-item');
+        if (index === 0) gameSlide.classList.add('active'); // Set the first slide as active
+
+        gameSlide.innerHTML = `
+            <a href="https://rawg.io/games/${game.slug}" target="_blank" class="carousel-link">
+                <div class="carousel-content">
+                    <img src="${game.background_image}" alt="${game.name}">
+                    <div class="carousel-text">
+                        <h3>${game.name}</h3>
+                        <p>Tags: ${game.tags.map(tag => tag.name).slice(0, 3).join(', ') || 'No tags available'}</p>
+                    </div>
+                </div>
+            </a>
+        `;
+
+        carouselInner.appendChild(gameSlide);
+    });
+}
+
+function changeSlide(direction) {
+    const slides = document.querySelectorAll('.carousel-item');
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+}
+
+
+fetchGames();
+// search game
+// async function searchGameByName(gameName) {
+//     const searchUrl = `https://api.rawg.io/api/games?key=${API_KEY}&search=${encodeURIComponent(gameName)}`;
+//     try {
+//         const response = await fetch(searchUrl);
+//         const data = await response.json();
+//         if (data.results && data.results.length > 0) {
+//             const gameId = data.results[0].id;
+//             getGameDetails(gameId);
+//         } else {
+//             console.log('Game not found');
+//         }
+//     } catch (error) {
+//         console.error('Error searching for game:', error);
+//     }
+// }
+
