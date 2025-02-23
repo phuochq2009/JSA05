@@ -21,24 +21,24 @@ async function fetchGames(page = 1, pageSize = 40, totalPages = y) {
 
 function displayGames(games) {
   let x = Math.floor(Math.random() * (40*y));
-  console.log(games);
+
   
-    games.slice(x-3, x).forEach((game, index) => { // Show only first 3 games
+    games.slice(x-3, x).forEach((game, index) => { 
         const gameSlide = document.createElement('div');
         gameSlide.classList.add('carousel-item');
-        if (index === 0) gameSlide.classList.add('active'); // Set the first slide as active
+        if (index === 0) gameSlide.classList.add('active'); 
 
         gameSlide.innerHTML = `
             <a href="https://rawg.io/games/${game.slug}" target="_blank" class="carousel-link">
                 <div class="carousel-content">
                     <img src="${game.background_image}" alt="${game.name}">
-                    <div class="carousel-text">
+                    <div class="carousel-text"> 
                         <h3>${game.name}</h3>
                         <p>Tags: ${game.tags.map(tag => tag.name).slice(0, 3).join(', ') || 'No tags available'}</p>
                     </div>
                 </div>
             </a>
-        `;
+        `
 
         carouselInner.appendChild(gameSlide);
     });
