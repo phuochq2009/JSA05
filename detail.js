@@ -46,14 +46,61 @@ function displayGameDetails(data) {
 function displayGameDetail(data2) {
     const game = data2;
             const firstDetail = document.getElementById('firstDetail');
+            let minimum = game.platforms[0].requirements.minimum.replace('Minimum:', '');
+            let recommended = game.platforms[0].requirements.recommended.replace('Recommended:', '');
             firstDetail.innerHTML = `
-                <h2>${game.name}</h2>
-                <h2>About</h2>
+                <h2 class="game-header">${game.name}</h2>
+                <h3>About</h2>
                 ${game.description} 
-                <p>Released: ${game.released}</p>
-                <p>Rating: ${game.rating}</p>
-                <p>Tags: ${game.tags.map(tag => tag.name).slice(0, 3).join(', ') || 'No tags available'}</p>
-            `;
+                <div class="row">
+                    <div class="col-6">
+                        <h4>Platforms</h2>
+                        <p>${game.platforms.map(platform => platform.platform.name).join(', ')}</p>
+                    </div>
+                    <div class="col-6">
+                        <h4>Metascore</h2>
+                        <p>${game.metacritic || 'No metascrore available'}</p>
+                    </div>
+                    <div class="col-6">
+                        <h4>Genres</h2>
+                        <p>${game.genres.map(genre => genre.name).join(', ')}</p>
+                    </div>
+                    <div class="col-6">
+                        <h4>Release date</h2>
+                        <p>${game.released}</p>
+                    </div>
+                    <div class="col-6">
+                        <h4>Developer</h2>
+                        <p>${game.developers.map(developer => developer.name).join(', ')}</p>
+                    </div>
+                    <div class="col-6">
+                        <h4>Publisher</h2>
+                        <p>${game.publishers.map(publisher => publisher.name).join(', ')}</p>
+                    </div>
+                    <div class="col-6">
+                        <h4>Age rating</h2>
+                        <p>${game.esrb_rating.name || 'No age rating available'}</p>
+                    </div>
+                    <div class="col-12">
+                        <h4>Tags</h2>
+                        <p>${game.tags.map(tag => tag.name).join(', ') || 'No tags available'}</p>
+                    </div>
+                    <div class="col-12">
+                        <h4>Website</h2>
+                        <p><a target="blank" class="link" href="${game.website}">${game.website}</a></p>
+                    </div>
+                </div>
+                <h3>System Requirements</h3>
+                <h4>Minimum</h4>
+                <p>${minimum}</p>
+                <h4>Recommended</h4>
+                <p>${recommended}</p>
+                `;
+                const secondDetail = document.getElementById('secondDetail');
+                secondDetail.innerHTML = `
+                <h3>Where to buy</h3>
+                <div class="row">${game.stores.map(st => `<div class="col-6 btn-link-container  "><a target="blank" class="link btn-link" href="http://${st.store.domain}">${st.store.name}</a></div>`).join('')}</div>`;
+
         }
 // Change screenshot
 function changeScreenshot(direction) {

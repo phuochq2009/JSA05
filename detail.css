@@ -15,7 +15,7 @@ body {
     position: relative;
 }
 
-.row {
+.row-main {
     margin: 0 10%;
 }
 
@@ -110,6 +110,41 @@ body {
 
 .details a:hover {
     text-decoration: underline;
+}
+
+.first-detail h4{
+    color: hsla(0, 0%, 100%, .2);
+}
+.link{
+    text-decoration: none;
+    color: white;
+}
+
+.btn-link{
+    background-color: hsla(0, 0%, 100%, .2);
+    color: hsla(0, 0%, 100%, 0.525);
+    width: 100%;
+    padding: 10px 0px;
+    border-radius: 9px;
+    text-align: center;
+
+}
+
+.btn-link-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.btn-link:hover{
+    background-color: hsl(0, 0%, 0%);
+    color: white;
+    transition: 0.5s;
+}
+
+.game-header{
+    font-size: 50px;
+    font-weight: 700;
 }
 
 .carousel-button {
