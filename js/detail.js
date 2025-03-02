@@ -1,6 +1,6 @@
 const API_KEY = 'd81ce92c1bcd4d74bba38ee005e26d8c'; // Replace with your RAWG API Key
 const BASE_URL = `https://api.rawg.io/api/games`;
-const id = '3498'; // Replace with the specific game slug
+const id = new URLSearchParams(window.location.search).get("id"); // Replace with the specific game slug
 let currentScreenshot = 0; // Initialize currentScreenshot
 
 // Fetch game details from RAWG API

@@ -29,7 +29,7 @@ function displayGames(games) {
         if (index === 0) gameSlide.classList.add('active'); 
 
         gameSlide.innerHTML = `
-            <a href="https://rawg.io/games/${game.slug}" target="_blank" class="carousel-link">
+            <a href="../detail.html?id=${game.id}" target="_blank" class="carousel-link">
                 <div class="carousel-content">
                     <img src="${game.background_image}" alt="${game.name}">
                     <div class="carousel-text"> 
