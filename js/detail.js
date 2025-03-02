@@ -2,7 +2,7 @@ const API_KEY = 'd81ce92c1bcd4d74bba38ee005e26d8c'; // Replace with your RAWG AP
 const BASE_URL = `https://api.rawg.io/api/games`;
 const id = new URLSearchParams(window.location.search).get("id"); // Replace with the specific game slug
 let currentScreenshot = 0; // Initialize currentScreenshot
-
+console.log(id);
 // Fetch game details from RAWG API
 async function fetchGameDetails() {
     try {
@@ -45,9 +45,15 @@ function displayGameDetails(data) {
     });}
 function displayGameDetail(data2) {
     const game = data2;
-            const firstDetail = document.getElementById('firstDetail');
-            let minimum = game.platforms[0].requirements.minimum.replace('Minimum:', '');
-            let recommended = game.platforms[0].requirements.recommended.replace('Recommended:', '');
+    console.log(game);
+    const firstDetail = document.getElementById('firstDetail');
+    let minimum;
+    if (game.platforms[0].requirements && game.platforms[0].requirements.minimum) {
+        minimum = game.platforms[0].requirements.minimum.replace('Minimum:', '');
+    } else {
+        minimum = "No system requirements available";
+    }   
+            
             firstDetail.innerHTML = `
                 <h2 class="game-header">${game.name}</h2>
                 <h3>About</h2>
@@ -93,8 +99,7 @@ function displayGameDetail(data2) {
                 <h3>System Requirements</h3>
                 <h4>Minimum</h4>
                 <p>${minimum}</p>
-                <h4>Recommended</h4>
-                <p>${recommended}</p>
+                
                 `;
                 const secondDetail = document.getElementById('secondDetail');
                 secondDetail.innerHTML = `

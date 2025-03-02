@@ -4,7 +4,7 @@ const BASE_URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
 const carouselInner = document.getElementById('carouselInner');
 let currentSlide = 0; 
 
-let y = 2;
+let y = 1;
 async function fetchGames(page = 1, pageSize = 40, totalPages = y) {
   try {
       let allGames = [];

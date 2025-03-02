@@ -147,6 +147,11 @@ body {
     font-weight: 700;
 }
 
+.logo{
+    width: 65px;
+    height: 60px;
+}
+
 .carousel-button {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;

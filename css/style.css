@@ -97,3 +97,8 @@ body {
 .carousel-button:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
+.logo{
+    width: 65px;
+    height: 60px;
+}
