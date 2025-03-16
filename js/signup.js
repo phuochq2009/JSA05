@@ -2,13 +2,16 @@ function signUp() {
     event.preventDefault();
     let emailData = document.getElementById("email").value;
     let passwordData = document.getElementById("password").value;
-    let dobData = document.getElementById("date").value;
-    let addressData = document.getElementById("address").value;
-  
-    if (emailData === "" || passwordData === "") {
+    let confirmPasswordData = document.getElementById("confirmPassword").value;
+    let usernameData = document.getElementById("username").value;
+    if (emailData === "" || passwordData === "" || confirmPasswordData === "" || usernameData === "") {
       alert("Please fill in all fields");
       return;
     }
+    if (passwordData !== confirmPasswordData) {
+      alert("Password and confirm password do not match");
+      return;
+    }   
   
     let users = JSON.parse(localStorage.getItem("users")) || [];
   
@@ -22,8 +25,7 @@ function signUp() {
     const data = {
       email: emailData,
       password: passwordData,
-      dob: dobData,
-      address: addressData,
+      username: usernameData,
     };
   
     users.push(data);
@@ -39,11 +41,17 @@ function signUp() {
     const users = JSON.parse(localStorage.getItem("users")) || [];
     if (isLogin) {
       document.getElementById('textt').innerHTML= `
-      <div class="nav-link" id="textt"> ${users[0].email}  </a>
+      <div class=" dropdown"> 
+      <p class="nav-link">
+      ${users[0].username} <i class="fa-solid fa-caret-down"><button class="drop-content" onclick="logout()">Log Out</button></i>
+       
+      </p> 
+      
+    </div>
       `;
     } else {
       document.getElementById('textt').innerHTML = `
-      <a class="nav-link" id="textt" href="./login.html">Log in</a>`
+      <a class="nav-link" href="login.html">Log in</a>`
     }
   }
   

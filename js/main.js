@@ -89,3 +89,29 @@ fetchGames();
 //     }
 // }
 
+
+function checkLoginStatus() {
+    const isLogin = localStorage.getItem("isLogin");
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    if (isLogin) {
+      document.getElementById('textt').innerHTML= `
+      <div class=" dropdown"> 
+      <p class="nav-link">
+      ${users[0].username} <i class="fa-solid fa-caret-down"><button class="drop-content" onclick="logout()">Log Out</button></i>
+       
+      </p> 
+      
+    </div>
+      `;
+    } else {
+      document.getElementById('textt').innerHTML = `
+      <a class="nav-link" href="login.html">Log in</a>`
+    }
+  }
+  
+  checkLoginStatus()
+  
+  function logout() {
+    localStorage.removeItem("isLogin");
+    location.reload();
+  }
