@@ -38,6 +38,12 @@ function displayGameDetails(data) {
                         `).join('')}
                     </div>
                 </div>
+                <button class="carousel-button prev" onclick="changeScreenshot(-1)">
+            ❮
+          </button>
+          <button class="carousel-button next" onclick="changeScreenshot(1)">
+            ❯
+          </button>
                 
             `;
            

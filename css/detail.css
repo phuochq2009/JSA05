@@ -152,6 +152,17 @@ body {
     height: 60px;
 }
 
+.logo-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.text-white{
+    text-decoration: none;
+}
+
 .carousel-button {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;

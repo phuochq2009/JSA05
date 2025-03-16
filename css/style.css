@@ -102,3 +102,37 @@ body {
     width: 65px;
     height: 60px;
 }
+
+.logo-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.text-white{
+    text-decoration: none;
+}
+
+.trending-img{
+    width: 230px; 
+    height: 130px; 
+    object-fit: cover; 
+    border-radius: 10px;
+    margin-right: 20px; 
+}
+
+.trending-game{
+    background-color: #2b2f35;
+    box-shadow: 0 0 16px 0px rgba(0, 0, 0, .45);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.trending-text{
+    text-decoration: none;
+    color: white;
+    
+}
