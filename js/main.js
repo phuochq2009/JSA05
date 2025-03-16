@@ -20,7 +20,7 @@ async function fetchGames(page = 1, pageSize = 20, totalPages = y) {
 }
 
 function displayGames(games) {
-  let x = Math.floor(Math.random() * (20*y));
+  let x = Math.floor(Math.random() * (20*y+6));
 
   
     games.slice(x-6, x).forEach((game, index) => { 

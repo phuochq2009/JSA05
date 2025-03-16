@@ -6,9 +6,6 @@ console.log(id);
 // Fetch game details from RAWG API
 async function fetchGameDetails() {
     try {
-        const response = await fetch(`${BASE_URL}?key=${API_KEY}`);
-        const data = await response.json();
-        displayGameDetails(data);
         const response2 = await fetch(`${BASE_URL}/${id}?key=${API_KEY}`);
         const data2 = await response2.json();
         displayGameDetail(data2);
@@ -17,38 +14,7 @@ async function fetchGameDetails() {
     }
 }
 
-// Display game details on the page
-function displayGameDetails(data) {
-    const games = data.results;
-    games.forEach((game, index) => {
-        if (game.id == id) {
-            const gameDetail = document.getElementById('gameDetail');
-            const screenshots = game.short_screenshots;
-            if (screenshots.length === 0) {
-                gameDetail.innerHTML = '<p>No screenshots available.</p>';
-                return;
-            }
-            gameDetail.innerHTML = `
-                <div class="carousel">
-                    <div id="carouselInner" class="carousel-inner">
-                        ${screenshots.map((screenshot, index) => `
-                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                <img src="${screenshot.image}" alt="Screenshot">
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                <button class="carousel-button prev" onclick="changeScreenshot(-1)">
-            ❮
-          </button>
-          <button class="carousel-button next" onclick="changeScreenshot(1)">
-            ❯
-          </button>
-                
-            `;
-           
-        }
-    });}
+
 function displayGameDetail(data2) {
     const game = data2;
     console.log(game);
@@ -112,6 +78,28 @@ function displayGameDetail(data2) {
                 <h3>Where to buy</h3>
                 <div class="row">${game.stores.map(st => `<div class="col-6 btn-link-container  "><a target="blank" class="link btn-link" href="http://${st.store.domain}">${st.store.name}</a></div>`).join('')}</div>`;
 
+                const gameDetail = document.getElementById('gameDetail');
+
+                gameDetail.innerHTML = `
+                    <div class="carousel">
+                        <div id="carouselInner" class="carousel-inner">
+                            <div class="carousel-item active ">
+                                    <img src="${game.background_image}" alt="Screenshot">
+                                </div>
+                            <div class="carousel-item">
+                                    <img src="${game.background_image_additional}" alt="Screenshot">
+                                </div>
+                            
+                        </div>
+                    </div>
+                    <button class="carousel-button prev" onclick="changeScreenshot(-1)">
+                ❮
+              </button>
+              <button class="carousel-button next" onclick="changeScreenshot(1)">
+                ❯
+              </button>
+                    
+                `;
         }
 // Change screenshot
 function changeScreenshot(direction) {
