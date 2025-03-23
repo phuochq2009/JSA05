@@ -92,12 +92,13 @@ fetchGames();
 
 function checkLoginStatus() {
     const isLogin = localStorage.getItem("isLogin");
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+        const userName = localStorage.getItem("userName");
     if (isLogin) {
       document.getElementById('textt').innerHTML= `
+      
       <div class=" dropdown"> 
       <p class="nav-link">
-      ${users[0].username} <i class="fa-solid fa-caret-down"><button class="drop-content" onclick="logout()">Log Out</button></i>
+      ${userName} <i class="fa-solid fa-caret-down"><button class="drop-content" onclick="logout()">Log Out</button></i>
        
       </p> 
       
@@ -113,5 +114,8 @@ function checkLoginStatus() {
   
   function logout() {
     localStorage.removeItem("isLogin");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
     location.reload();
+
   }

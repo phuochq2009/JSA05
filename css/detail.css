@@ -215,3 +215,11 @@ body {
 .dropdown p{
     margin:0;
 }
+
+.wishlist-button{
+    margin-bottom: 15px;
+}
+
+.wishlist-button:hover{
+    cursor: pointer;
+}

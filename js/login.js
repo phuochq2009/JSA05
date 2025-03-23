@@ -13,7 +13,10 @@
       if (users[i].email === emailData && users[i].password === passwordData) {
         const isLogin = true;
         localStorage.setItem("isLogin", isLogin);
-  
+        const userEmail = users[i].email;
+        const userName= users[i].username;
+        localStorage.setItem("userEmail", userEmail);
+        localStorage.setItem("userName", userName);
         alert("Log in successfully");  
         location.href='index.html'  
         return;
@@ -24,10 +27,17 @@
 
   function checkLoginStatus() {
     const isLogin = localStorage.getItem("isLogin");
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+        const userName = localStorage.getItem("userName");
     if (isLogin) {
       document.getElementById('textt').innerHTML= `
-      <div class="nav-link"> ${users[0].username} <i class="fa-solid fa-caret-down"></i> </div>
+      
+      <div class=" dropdown"> 
+      <p class="nav-link">
+      ${userName} <i class="fa-solid fa-caret-down"><button class="drop-content" onclick="logout()">Log Out</button></i>
+       
+      </p> 
+      
+    </div>
       `;
     } else {
       document.getElementById('textt').innerHTML = `
@@ -39,5 +49,8 @@
   
   function logout() {
     localStorage.removeItem("isLogin");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
     location.reload();
+
   }
