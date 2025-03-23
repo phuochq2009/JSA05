@@ -8,7 +8,14 @@
       alert("Please fill in all fields");
       return;
     }
-      const users = JSON.parse(localStorage.getItem("users")) || [];
+    
+    const usersLocalStorage = localStorage.getItem("users") || [];
+    if (usersLocalStorage.length === 0) {
+      alert("Email or password is incorrect");
+      return;
+    }
+
+      const users = JSON.parse(usersLocalStorage);
     for (let i = 0; i < users.length; i++) {
       if (users[i].email === emailData && users[i].password === passwordData) {
         const isLogin = true;
