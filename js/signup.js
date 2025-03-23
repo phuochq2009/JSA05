@@ -13,15 +13,18 @@ function signUp() {
       return;
     }   
   
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-  
+    let usersLocalStorage = localStorage.getItem("users") || [];
+  if (usersLocalStorage.length != 0) {
+    const users = JSON.parse(usersLocalStorage);
     for (let i = 0; i < users.length; i++) {
       if (users[i].email === emailData) {
         alert("Email already exists");
         return;
       }
-    }
-  
+    }}
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
     const data = {
       email: emailData,
       password: passwordData,
