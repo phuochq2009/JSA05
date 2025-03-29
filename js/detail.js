@@ -183,14 +183,22 @@ function addWish() {
 
   const userName = getUserName();
   let wishlistKey = `wishlist-${userName}`;
-  let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+  let wishlistLocalStorage = localStorage.getItem(wishlistKey) || [];
   
-  if (wishlist.includes(id)) {
-    alert("Game already in wishlist");
-    return;
+  if (wishlistLocalStorage.length != 0) {
+    const wishlist = JSON.parse(wishlistLocalStorage);
+    for (let i = 0; i < wishlist.length; i++) {
+      if (wishlist[i] === id) {
+        alert("Game already in wishlist");
+        return;
+      }
+    }
+    wishlist.push(id);
+    localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+    alert("Game added to wishlist");
   }
-
-  wishlist.push(id);
-  localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
-  alert("Game added to wishlist");
+  else {
+    localStorage.setItem(wishlistKey, JSON.stringify([id]));
+    alert("Game added to wishlist");
+  }
 }

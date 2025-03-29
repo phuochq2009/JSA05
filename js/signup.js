@@ -21,9 +21,9 @@ function signUp() {
         alert("Email already exists");
         return;
       }
-    }}
-
-  const users = JSON.parse(localStorage.getItem("users")) || [];
+    }
+    
+  }
 
     const data = {
       email: emailData,
@@ -31,8 +31,14 @@ function signUp() {
       username: usernameData,
     };
   
-    users.push(data);
-    localStorage.setItem("users", JSON.stringify(users));
+    if (usersLocalStorage.length === 0) {
+      localStorage.setItem("users", JSON.stringify([data]));
+    }
+    else {
+      const users = JSON.parse(usersLocalStorage);
+      users.push(data);
+      localStorage.setItem("users", JSON.stringify(users));
+    }
   
     alert("Sign up successfully");
     location.href ="login.html"

@@ -18,13 +18,15 @@ function displayWishlist() {
 
     const userName = getUserName();
   let wishlistKey = `wishlist-${userName}`;
-  let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+  let wishlistLocalStorage = localStorage.getItem(wishlistKey) || [];
   
 
-    if (wishlist.length === 0) {
+    if (wishlistLocalStorage.length === 0) {
         wishlistContainer.innerHTML = '<p>Your wishlist is empty.</p>';
         return;
     }
+
+    const wishlist = JSON.parse(wishlistLocalStorage);
 
     wishlist.forEach(async (gameId) => {
         const game = await fetchGameDetails(gameId);
