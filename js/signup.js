@@ -12,6 +12,12 @@ function signUp() {
       alert("Password and confirm password do not match");
       return;
     }   
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regex.test(emailData)) {
+      alert("Please enter a valid email address");
+      return;
+    }
   
     let usersLocalStorage = localStorage.getItem("users") || [];
   if (usersLocalStorage.length != 0) {
